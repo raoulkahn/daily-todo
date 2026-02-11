@@ -1,8 +1,25 @@
-.app {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: var(--space-lg) var(--space-md);
+.viewport {
   min-height: 100vh;
+  background: var(--theme-gradient);
+  background-color: var(--theme-bg-fallback);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+  transition: background var(--theme-transition), background-color var(--theme-transition);
+}
+
+.card {
+  width: 100%;
+  max-width: var(--max-width);
+  background: var(--theme-card-bg);
+  border-radius: 20px;
+  box-shadow: var(--theme-card-shadow);
+  padding: var(--space-lg) var(--space-md);
+  color: var(--theme-card-text);
+  transition: background var(--theme-transition),
+              color var(--theme-transition),
+              box-shadow var(--theme-transition);
 }
 
 .header {
@@ -10,15 +27,24 @@
 }
 
 .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-semibold);
   text-align: center;
 }
 
+.logo {
+  flex-shrink: 0;
+  transition: fill var(--theme-transition);
+}
+
 .dayName {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-text);
+  color: var(--theme-text);
   letter-spacing: -0.01em;
 }
 
@@ -34,12 +60,24 @@
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   color: white;
-  background: var(--color-teal);
+  background: var(--theme-accent);
   border: none;
   border-radius: var(--radius-md);
-  transition: opacity var(--transition-fast);
+  transition: opacity var(--transition-fast), background var(--theme-transition);
 }
 
 .addBtn:hover {
   opacity: 0.85;
+}
+
+@media (max-width: 480px) {
+  .viewport {
+    padding: 0;
+  }
+
+  .card {
+    border-radius: 0;
+    min-height: 100vh;
+    box-shadow: none;
+  }
 }

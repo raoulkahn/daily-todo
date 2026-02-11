@@ -22,8 +22,8 @@ body {
   font-family: var(--font-family);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  color: var(--theme-text);
+  background-color: var(--theme-bg-fallback);
   line-height: 1.5;
   min-height: 100vh;
 }

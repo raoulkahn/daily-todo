@@ -1,4 +1,5 @@
 import { formatTime } from '../utils/dateHelpers';
+import Checkbox from './Checkbox';
 import styles from './TaskItem.module.css';
 
 function TaskItem({ task, onToggle, onClick }) {
@@ -26,14 +27,13 @@ function TaskItem({ task, onToggle, onClick }) {
         {task.notes && <span className={styles.notes}>{task.notes}</span>}
       </div>
 
-      <input
-        type="checkbox"
-        className={styles.checkbox}
-        checked={task.completed}
-        onChange={() => onToggle(task.id)}
-        onClick={(e) => e.stopPropagation()}
-        aria-label={task.completed ? 'Mark as not done' : 'Mark as done'}
-      />
+      <div onClick={(e) => e.stopPropagation()}>
+        <Checkbox
+          checked={task.completed}
+          onChange={() => onToggle(task.id)}
+          ariaLabel={task.completed ? 'Mark as not done' : 'Mark as done'}
+        />
+      </div>
     </div>
   );
 }

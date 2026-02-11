@@ -1,0 +1,29 @@
+.checkbox {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--theme-checkbox-border);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background var(--theme-transition),
+              border-color var(--theme-transition);
+}
+
+.checkbox:hover {
+  opacity: 0.8;
+}
+
+.checkbox.checked {
+  background: var(--theme-checkbox-fill);
+  border-color: var(--theme-checkbox-fill);
+}
+
+.icon {
+  width: 14px;
+  height: 14px;
+}

@@ -51,7 +51,28 @@
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-normal: 250ms ease;
+  --theme-transition: 0.3s ease;
 
   /* Layout */
-  --max-width: 640px;
+  --max-width: 700px;
+
+  /* Theme defaults (overridden at runtime by ThemeContext) */
+  --theme-gradient: linear-gradient(160deg, #dfe3ea 0%, #c8cfd8 100%);
+  --theme-bg-fallback: #dfe3ea;
+  --theme-card-bg: #ffffff;
+  --theme-card-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --theme-today-dot: #3d4551;
+  --theme-accent: #4a5568;
+  --theme-accent-hover: #3d4551;
+  --theme-task-bg: #f5f6f8;
+  --theme-task-bg-hover: #eceef2;
+  --theme-checkbox-border: #c0c7d1;
+  --theme-checkbox-fill: #4a5568;
+  --theme-text: #1a1a1a;
+  --theme-text-secondary: #6b6b6b;
+  --theme-text-muted: #a0a0a0;
+  --theme-surface: #ffffff;
+  --theme-border: #e0e4ea;
+  --theme-border-light: #f0f2f5;
+  --theme-card-text: #1a1a1a;
 }
