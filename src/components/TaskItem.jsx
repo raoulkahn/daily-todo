@@ -23,6 +23,7 @@ function TaskItem({ task, onToggle, onClick }) {
 
       <div className={styles.content}>
         <span className={styles.title}>{task.title}</span>
+        {task.notes && <span className={styles.notes}>{task.notes}</span>}
       </div>
 
       <input
