@@ -25,16 +25,14 @@ function TaskItem({ task, onToggle, onClick }) {
         <span className={styles.title}>{task.title}</span>
       </div>
 
-      <button
-        className={`${styles.statusBtn} ${task.completed ? styles.statusDone : ''}`}
-        onClick={(e) => {
-          e.stopPropagation();
-          onToggle(task.id);
-        }}
+      <input
+        type="checkbox"
+        className={styles.checkbox}
+        checked={task.completed}
+        onChange={() => onToggle(task.id)}
+        onClick={(e) => e.stopPropagation()}
         aria-label={task.completed ? 'Mark as not done' : 'Mark as done'}
-      >
-        {task.completed ? 'Done' : 'To Do'}
-      </button>
+      />
     </div>
   );
 }

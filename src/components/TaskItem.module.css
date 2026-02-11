@@ -3,16 +3,15 @@
   align-items: center;
   gap: var(--space-md);
   padding: var(--space-md);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-left: 3px solid var(--color-teal);
+  background: #EBEBEB;
+  border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: background var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .item:hover {
-  border-color: var(--color-text-muted);
+  background: #E0E0E0;
   box-shadow: var(--shadow-sm);
 }
 
@@ -22,7 +21,7 @@
 }
 
 .item.completed {
-  opacity: 0.6;
+  opacity: 0.5;
   transition: opacity var(--transition-normal);
 }
 
@@ -64,30 +63,12 @@
   word-break: break-word;
 }
 
-.statusBtn {
+.checkbox {
   flex-shrink: 0;
-  padding: var(--space-xs) var(--space-sm);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: 0.02em;
-  border-radius: var(--radius-sm);
-  border: none;
-  color: white;
-  background: var(--color-teal);
-  transition: all var(--transition-fast);
-}
-
-.statusBtn:hover {
-  opacity: 0.85;
-}
-
-.statusBtn.statusDone {
-  color: white;
-  background: var(--color-success);
-}
-
-.statusBtn.statusDone:hover {
-  opacity: 0.85;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--color-teal);
 }
 
 @media (max-width: 480px) {
