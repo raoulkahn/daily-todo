@@ -33,7 +33,7 @@ function TaskItem({ task, onToggle, onClick }) {
         }}
         aria-label={task.completed ? 'Mark as not done' : 'Mark as done'}
       >
-        {task.completed ? 'Done' : 'Todo'}
+        {task.completed ? 'Done' : 'To Do'}
       </button>
     </div>
   );

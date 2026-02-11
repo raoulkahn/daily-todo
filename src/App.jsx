@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { TodoProvider } from './context/TodoContext';
-import { getTodayString } from './utils/dateHelpers';
+import { getTodayString, getDayName } from './utils/dateHelpers';
 import DateNavigator from './components/DateNavigator';
 import TaskList from './components/TaskList';
 import TaskModal from './components/TaskModal';
@@ -30,13 +30,14 @@ function App() {
     <TodoProvider>
       <div className={styles.app}>
         <header className={styles.header}>
-          <h1 className={styles.title}>Daily Todo</h1>
+          <h1 className={styles.title}>Daily To Do</h1>
         </header>
         <DateNavigator
           selectedDate={selectedDate}
           onDateChange={setSelectedDate}
         />
         <main className={styles.main}>
+          <h2 className={styles.dayName}>{getDayName(selectedDate)}</h2>
           <TaskList
             selectedDate={selectedDate}
             onTaskClick={openEditModal}

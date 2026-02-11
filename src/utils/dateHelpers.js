@@ -1,4 +1,4 @@
-import { format, addDays, subDays, isToday, isBefore, startOfDay } from 'date-fns';
+import { format, addDays, subDays, isToday, isBefore, startOfDay, startOfWeek } from 'date-fns';
 
 /**
  * Format a Date object to "YYYY-MM-DD" string for storage.
@@ -15,11 +15,19 @@ export function getTodayString() {
 }
 
 /**
- * Format a date string for display — e.g., "Monday, February 10, 2026"
+ * Format a date string for the navigator — e.g., "February 10, 2026"
  */
 export function formatDisplayDate(dateString) {
   const date = new Date(dateString + 'T00:00:00');
-  return format(date, 'EEEE, MMMM d, yyyy');
+  return format(date, 'MMMM d, yyyy');
+}
+
+/**
+ * Get the day of the week name — e.g., "Wednesday"
+ */
+export function getDayName(dateString) {
+  const date = new Date(dateString + 'T00:00:00');
+  return format(date, 'EEEE');
 }
 
 /**
@@ -144,4 +152,38 @@ export function addThirtyMinutes(timeString) {
   }
   if (newH > 23) return '23:30';
   return `${newH.toString().padStart(2, '0')}:${newM.toString().padStart(2, '0')}`;
+}
+
+/**
+ * Get the 7 days (Sun–Sat) of the week containing the given date string.
+ * Returns an array of "YYYY-MM-DD" strings.
+ */
+export function getWeekDays(dateString) {
+  const date = new Date(dateString + 'T00:00:00');
+  const weekStart = startOfWeek(date, { weekStartsOn: 0 }); // Sunday
+  return Array.from({ length: 7 }, (_, i) => toDateString(addDays(weekStart, i)));
+}
+
+/**
+ * Format a date string to "MMM yyyy" — e.g., "Feb 2026"
+ */
+export function formatMonthYear(dateString) {
+  const date = new Date(dateString + 'T00:00:00');
+  return format(date, 'MMM yyyy');
+}
+
+/**
+ * Get the date string for the same weekday in the previous week.
+ */
+export function getPrevWeek(dateString) {
+  const date = new Date(dateString + 'T00:00:00');
+  return toDateString(subDays(date, 7));
+}
+
+/**
+ * Get the date string for the same weekday in the next week.
+ */
+export function getNextWeek(dateString) {
+  const date = new Date(dateString + 'T00:00:00');
+  return toDateString(addDays(date, 7));
 }

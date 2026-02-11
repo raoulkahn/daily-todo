@@ -1,6 +1,8 @@
 :root {
   /* Colors */
-  --color-bg: #fafafa;
+  --color-bg: #F7F8FA;
+  --color-teal: #028090;
+  --color-teal-bg: #028090;
   --color-surface: #ffffff;
   --color-border: #e5e5e5;
   --color-border-light: #f0f0f0;

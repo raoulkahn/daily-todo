@@ -15,6 +15,13 @@
   text-align: center;
 }
 
+.dayName {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
 .main {
   display: flex;
   flex-direction: column;

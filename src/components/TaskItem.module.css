@@ -5,6 +5,7 @@
   padding: var(--space-md);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-teal);
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
@@ -68,27 +69,25 @@
   padding: var(--space-xs) var(--space-sm);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-secondary);
-  background: var(--color-bg);
+  border: none;
+  color: white;
+  background: var(--color-teal);
   transition: all var(--transition-fast);
 }
 
 .statusBtn:hover {
-  border-color: var(--color-text-muted);
+  opacity: 0.85;
 }
 
 .statusBtn.statusDone {
-  color: var(--color-success);
-  background: var(--color-success-bg);
-  border-color: var(--color-success);
+  color: white;
+  background: var(--color-success);
 }
 
 .statusBtn.statusDone:hover {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 @media (max-width: 480px) {
