@@ -13,7 +13,7 @@ Build a daily todo list web app with a navigable day view. Each task has a title
 | Styling | CSS Modules | Clean, scoped styles without adding a CSS framework dependency. Keeps the bundle small and gives full control over the minimal aesthetic. |
 | State Management | React useState + Context | App is simple enough that we don't need Redux or Zustand. A single TodoContext provides shared state across components. |
 | Date Library | date-fns | Lightweight, tree-shakeable, no heavy Moment.js-style bundle. We need date math for navigation and rollover logic. |
-| Time Picker | Native HTML time inputs | Simple, accessible, no extra dependency. Styled to match our minimal aesthetic. |
+| Time Picker | Custom dropdowns (TimePicker.jsx) | Native `<input type="time">` had inconsistent step behavior across browsers. Custom dropdowns enforce :00/:30 increments reliably. |
 | Data Storage | localStorage with JSON | Simplest persistence layer. Tasks stored as a JSON array keyed by a unique ID. |
 | ID Generation | crypto.randomUUID() | Built into all modern browsers. No dependency needed. |
 | Build Tool | Vite | Fast, modern, zero-config for React. Production build is optimized out of the box. |
@@ -85,13 +85,14 @@ localStorage key: `"daily-todo-tasks"` → JSON array of all tasks across all da
 
 ```
 daily-todo/
+├── .github/workflows/deploy.yml        — GitHub Pages auto-deploy on push to main
 ├── index.html                          — Vite entry point
 ├── package.json                        — dependencies and scripts
-├── vite.config.js                      — Vite configuration
+├── vite.config.js                      — Vite configuration (base: /daily-todo/)
 ├── src/
 │   ├── main.jsx                        — React root render
-│   ├── App.jsx                         — App shell, layout, date state
-│   ├── App.module.css                  — App layout styles
+│   ├── App.jsx                         — App shell, layout, date + modal state
+│   ├── App.module.css                  — App layout styles + New Task button
 │   ├── index.css                       — Global styles, CSS variables, reset
 │   ├── components/
 │   │   ├── DateNavigator.jsx           — Date nav with arrows and today button
@@ -100,15 +101,17 @@ daily-todo/
 │   │   ├── TaskList.module.css
 │   │   ├── TaskItem.jsx                — Single task row with done toggle
 │   │   ├── TaskItem.module.css
-│   │   ├── TaskModal.jsx               — Create/edit form modal
-│   │   └── TaskModal.module.css
+│   │   ├── TaskModal.jsx               — Create/edit form modal with time auto-adjust
+│   │   ├── TaskModal.module.css
+│   │   ├── TimePicker.jsx              — Custom dropdown time picker (:00/:30)
+│   │   └── TimePicker.module.css
 │   ├── context/
 │   │   └── TodoContext.jsx             — React context, CRUD logic, localStorage sync
 │   ├── utils/
-│   │   ├── storage.js                  — localStorage read/write helpers
+│   │   ├── storage.js                  — localStorage helpers + demo task seeding
 │   │   ├── validation.js               — Overlap detection, form validation
 │   │   ├── rollover.js                 — Incomplete task rollover logic
-│   │   └── dateHelpers.js              — Date formatting, comparison utilities
+│   │   └── dateHelpers.js              — Date/time formatting, defaults, conversion
 │   └── styles/
 │       └── tokens.css                  — Design tokens (imported by index.css)
 ```
@@ -163,6 +166,6 @@ daily-todo/
 
 - **Risk**: localStorage has a ~5MB limit → **Mitigation**: For a todo app, this is effectively unlimited. A single task is ~200 bytes. That's ~25,000 tasks before any concern. Not a v1 problem.
 - **Risk**: Rollover logic could create duplicates if it runs multiple times → **Mitigation**: Rollover updates the task's date in place (same ID) rather than creating copies. Idempotent by design.
-- **Risk**: Time input UX varies across browsers → **Mitigation**: Native `<input type="time">` is well-supported in all modern browsers. We'll style the surrounding UI and accept the native picker.
+- **Risk**: ~~Time input UX varies across browsers~~ → **Resolved**: Replaced native time inputs with custom TimePicker dropdowns. No cross-browser inconsistency.
 - **Risk**: User clears localStorage accidentally → **Mitigation**: Accepted for v1. Could add export/import in v2.
 - **Risk**: CSS Modules naming collisions in dev → **Mitigation**: Vite handles CSS Modules scoping automatically. Non-issue in practice.

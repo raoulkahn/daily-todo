@@ -31,13 +31,43 @@ We follow a structured development process. Each phase has a /command:
 
 ## Project Overview
 - **App**: Daily Todo List
-- **Stack**: TBD (to be decided during exploration phase)
-- **Description**: A simple daily todo list app with title, time (like calendar events), mark complete, edit, and delete functionality
+- **Stack**: React + Vite, CSS Modules, date-fns, localStorage
+- **Deployed**: https://raoulkahn.github.io/daily-todo/ (GitHub Pages, auto-deploys on push to `main`)
+- **Description**: A daily todo list with navigable day view. Each task has a title, time range (30-min increments), optional notes, and a done toggle. Tasks auto-sort by start time, cannot overlap, and incomplete tasks roll over to the next day.
+
+## Architecture
+```
+src/
+├── App.jsx                  — App shell, date state, modal state
+├── components/
+│   ├── DateNavigator.jsx    — Day navigation (arrows + Today button)
+│   ├── TaskList.jsx         — Renders sorted tasks for a date, filters past dates
+│   ├── TaskItem.jsx         — Single task row with done toggle on right
+│   ├── TaskModal.jsx        — Create/edit form with validation + delete
+│   └── TimePicker.jsx       — Custom dropdown picker (hour/minute/AM-PM, :00/:30 only)
+├── context/
+│   └── TodoContext.jsx      — All state: CRUD, overlap checks, localStorage sync, rollover
+├── utils/
+│   ├── storage.js           — localStorage read/write + demo task seeding
+│   ├── validation.js        — Overlap detection + form field validation
+│   ├── rollover.js          — Moves incomplete past tasks to today on app load
+│   └── dateHelpers.js       — Date formatting, time conversion, default time logic
+└── styles/
+    └── tokens.css           — Design system (colors, type, spacing, shadows)
+```
+
+**Key patterns:**
+- TodoContext uses `useRef` to hold latest tasks for overlap checks (avoids stale closure race conditions)
+- TimePicker uses local `partial` state so the user can change one dropdown without the others snapping back
+- Time inputs auto-adjust: changing start time past end → end bumps to start + 30 min (and vice versa)
+- Rollover is idempotent — updates task date in place, never duplicates
 
 ## Project Conventions
 - Plans are stored as markdown files in `/plans/`
+- Issues are stored as markdown files in `/issues/`
 - All documentation updates go in this file or in code comments
 - When a feature is complete, update the Project Overview section above
+- CSS uses design tokens from `tokens.css` — don't hardcode colors/spacing
 
 ## Known Issues & Learnings
 <!-- This section gets updated via postmortems. When Claude makes a mistake, we document the root cause and fix here so it never happens again. -->
