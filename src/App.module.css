@@ -30,18 +30,16 @@
 
 .addBtn {
   width: 100%;
-  padding: var(--space-md);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
-  background: var(--color-surface);
-  border: 1px dashed var(--color-border);
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: white;
+  background: var(--color-teal);
+  border: none;
   border-radius: var(--radius-md);
-  transition: all var(--transition-fast);
+  transition: opacity var(--transition-fast);
 }
 
 .addBtn:hover {
-  color: var(--color-primary);
-  border-color: var(--color-primary);
-  background: rgba(37, 99, 235, 0.04);
+  opacity: 0.85;
 }
